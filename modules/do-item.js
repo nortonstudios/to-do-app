@@ -22,4 +22,13 @@ module.exports = class Task{
          }
          this.title = newTitle;
      }
+     getDesc(){
+         return this.description;
+     }
+     newDesc(description){
+         if(!description || typeof description !== 'string'){
+             throw new Error('Ne dexcription in argument string.');
+         }
+         this.description = description;
+     }
 }

@@ -72,6 +72,33 @@ describe('Task class', () =>{
 
     });
     describe('Description', () =>{
-        
+        //Set up local unit under test for Title
+        let dTask = new Task();
+        it('should have default.', ()=>{
+            //arrange
+            const expected = 'No description';
+            const actual = dTask.getDesc();
+            //assert
+            assert.equal(actual, expected);
+        });
+        it('should error on empty newDesc()', ()=>{
+            //arrange       
+            //assert
+            assert.throws(function(){dTask.newDesc();}, Error);
+        });
+        it('should error on int argument in newDesc()', ()=>{
+            //arrange       
+            //assert
+            assert.throws(function(){dTask.newDesc(4);}, Error);
+        });
+ 
+        it('should set and return new description', ()=>{
+            //arrange
+            const expected = 'New description';
+            dTask.newDesc(expected);
+            const actual = dTask.getDesc();
+            //assert
+            assert.equal(actual, expected);
+        });
     })
 });
