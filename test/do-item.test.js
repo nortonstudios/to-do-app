@@ -3,6 +3,7 @@ const Task = require('../modules/do-item.js');
 
 describe('Task class', () =>{
    
+    //Implementation tests.
     describe('Item in to-do list', ()=>{
     //Set up the unit under test.
     let task = new Task();
@@ -32,6 +33,11 @@ describe('Task class', () =>{
             assert.ok(task.priority);
         });
     });
+
+    // Title of to-do list item functionality tests;
+    // Default title, set new title - with empty, bad, and good 
+    // arguments.
+
     describe('Title', ()=>{
         //Set up local unit under test for Title
         let titleTask = new Task();
@@ -71,6 +77,10 @@ describe('Task class', () =>{
         })
 
     });
+
+    // Description of to-do list item functionality tests:
+    // Default description, set new description - with empty, bad, 
+    // and good arguments.
     describe('Description', () =>{
         //Set up local unit under test for Title
         let dTask = new Task();
@@ -91,7 +101,6 @@ describe('Task class', () =>{
             //assert
             assert.throws(function(){dTask.newDesc(4);}, Error);
         });
- 
         it('should set and return new description', ()=>{
             //arrange
             const expected = 'New description';
@@ -100,5 +109,7 @@ describe('Task class', () =>{
             //assert
             assert.equal(actual, expected);
         });
-    })
+    });
+
+    
 });

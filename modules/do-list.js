@@ -13,4 +13,9 @@ module.exports = class toDoList {
   }
 
 
+  //Ideas
+  // sort by prioriy, build array with priority value as indexes
+
+  // 
+
 

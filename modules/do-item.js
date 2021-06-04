@@ -1,4 +1,5 @@
 
+// Object for to-do list items. 
 module.exports = class Task{
     constructor(title = 'Untitled Task'){
         // if(id == undefined){
@@ -16,19 +17,26 @@ module.exports = class Task{
         // completed property
      }
 
+     //Changes title of item. Expects a string.
      changeTitle(newTitle){
          if(!newTitle || typeof newTitle !== 'string'){
              throw new Error('No title in argument string.')
          }
          this.title = newTitle;
      }
+
+     // Retruns item's description as a String.
      getDesc(){
          return this.description;
      }
+
+     // Changes description of item. Expects a string.
      newDesc(description){
          if(!description || typeof description !== 'string'){
              throw new Error('Ne dexcription in argument string.');
          }
          this.description = description;
      }
+
+     
 }
