@@ -111,5 +111,66 @@ describe('Task class', () =>{
         });
     });
 
-    
+    // Start time. When the task was created. 
+    // Tests: correct initialization, correct get.
+    describe('startTime', ()=>{
+        // Set up unit under test.
+        let startTask = new Task();
+        it('initializes with a time', ()=>{
+            //arrange, act
+            //assert
+            assert.ok(startTask.getStart());
+        });
+    });
+
+    // Priority of task.
+    // Tests: get priority - with and without being set in construcor,
+    // set priority.
+    describe('priority', ()=>{
+        //set up unit under test.
+        let pTask = new Task();
+
+        it('should return default priority, 500.', ()=>{
+            //arrange, act
+            //asset
+            assert.ok(pTask.getPriority());
+        });
+        it('should return new priority value.', ()=>{
+            //arrange
+            const expected = 345;
+            //act
+            pTask.setPriority(expected);
+            const actual = pTask.getPriority();
+            //assert
+            assert.strictEqual(actual, expected) ;
+        });
+        it('should throw on bad priority value on an string.', ()=>{
+            //arrange
+            //act
+            //assert
+            assert.throws(function(){pTask.setPriority('h')}, Error);
+        });     
+        it('should throw on bad priority value if empty.', ()=>{
+            //arrange
+            //act    
+            //assert
+            assert.throws(function(){pTask.setPriority('')}, Error);
+        });   
+        it('should throw on bad priority value if negative.', ()=>{
+            //arrange          
+            //act          
+            //assert
+            assert.throws(function(){pTask.setPriority(-500)}, Error);
+        });   
+        it('should convert a decimal to an int.', ()=>{
+            //arrange
+            const expected = 201;
+            const testValue = 200.2;
+            //act
+            pTask.setPriority(testValue);
+            const actual = pTask.getPriority();
+            //assert
+            assert.strictEqual(actual, expected);
+        });   
+    });
 });

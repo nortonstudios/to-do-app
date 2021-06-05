@@ -1,7 +1,7 @@
 
 // Object for to-do list items. 
 module.exports = class Task{
-    constructor(title = 'Untitled Task'){
+    constructor(title = 'Untitled Task', priority = 500){
         // if(id == undefined){
         //     throw new Error('no id');
         // } else {
@@ -13,7 +13,7 @@ module.exports = class Task{
         this.startTime = Date.now();
         this.due = -1;
         this.plannedDuration = 1;
-        this.priority = 5;
+        this.priority = priority; // greater than 0. 1 is high priority.
         // completed property
      }
 
@@ -38,5 +38,27 @@ module.exports = class Task{
          this.description = description;
      }
 
-     
+     // Returns time task was created.
+     getStart(){
+         return this.startTime;
+     }
+
+     // Returns tasks priority.
+     getPriority(){
+         return this.priority;
+     }
+
+     // Sets tasks priority, Expects an int. Ceilings any decimals.
+     setPriority(p){
+         if(!p || typeof p !== 'number' || p <= 0){
+            throw new Error('Invalid priority.');
+         }
+         this.priority = Math.ceil(p);
+     }
+
+
 }
+
+// Notes and to-do
+// set a differnent start time.
+// new json based initialization
