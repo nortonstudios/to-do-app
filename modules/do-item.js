@@ -17,6 +17,10 @@ module.exports = class Task{
         // completed property
      }
 
+     getTitle(){
+         return this.title;
+     }
+
      //Changes title of item. Expects a string.
      changeTitle(newTitle){
          if(!newTitle || typeof newTitle !== 'string'){

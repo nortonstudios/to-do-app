@@ -49,6 +49,14 @@ describe('Task class', () =>{
             //assert
             assert.equal(actual, expected);
         });
+        it('should return title from getTtile()', ()=>{
+            //arrange 
+            const expected = 'Untitled Task';
+            //act
+            const actual = titleTask.getTitle();
+            //assert
+            assert.equal(actual, expected);
+        })
         it('should return "Test1" as passed to constructor', () =>{
             //arrange 
             let expected = 'Test1';
