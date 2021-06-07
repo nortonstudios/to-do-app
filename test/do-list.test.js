@@ -183,18 +183,75 @@ describe('List class', ()=>{
             assert.notStrictEqual(testList.getList(), testList);
             
         });
-
-
-        it('should delete an item by index', function(){
-            //arrange
-            //act
-            testList.delete(0);
-            //assert
-            assert.notStrictEqual(testList.getList(), testList);
-        })
     });
 
-    // Delete an item
+    describe('deletions', function(){
+        let testList = new toDoList();
+        const expected = 'New Task';
+        testList.newTask(expected);
+        testList.newTask();
+        testList.newTask(expected);
+        testList.newTask('Mow lawn');
+
+        //Delete a middle item
+        it('should delete a middle item by index', function(){
+           
+            //arrange
+            const expected = [];
+            expected.push(testList.getTask(0));
+            expected.push(testList.getTask(2));
+            expected.push(testList.getTask(3));
+            //act
+            testList.remove(1);
+            const actual = [];
+            actual.push(testList.getTask(0));
+            actual.push(testList.getTask(1));
+            actual.push(testList.getTask(2));
+            //assert
+            assert.deepEqual(actual, expected);
+            
+        });
+
+        // Delete last item
+        it('should delete last item by index', function(){
+            //arrange
+            
+            const expected = [];
+            expected.push(testList.getTask(0));
+            expected.push(testList.getTask(1));
+            //act
+            testList.remove(2);
+            const actual = [];
+            actual.push(testList.getTask(0));
+            actual.push(testList.getTask(1));
+            //assert
+            assert.deepEqual(actual, expected);
+        });
+
+        it('should should be out of bounds and throw', function(){
+            //arrange, act
+            //assert
+            assert.throws(function(){testList.getTask(2)}, Error);
+        });
+
+        // Delete first item
+        it('should delete first item by index', function(){
+        
+            // //arrange
+            const expected = [];
+            expected.push(testList.getTask(1));
+            //act
+            testList.remove(0);
+            const actual = testList.getList();
+            //assert
+            assert.deepEqual(actual, expected);
+            
+        });
+        
+        
+    });
+
+    
 
 
 

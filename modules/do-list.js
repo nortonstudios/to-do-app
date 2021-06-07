@@ -54,14 +54,21 @@ module.exports = class toDoList {
         return -1;
     }
 
+    //checks for valid title format
     titleCheck(title){
         if( !title || typeof title !== 'string'){
             throw new Error('Invalid title.');
         }
     }
 
+    // returns entire list as array
     getList(){
         return this.tasks;
+    }
+
+    //removes a task from list
+    remove(index){
+        this.tasks.splice(index, 1);
     }
 
 
