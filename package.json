@@ -10,6 +10,9 @@
     "test": "mocha || true"
   },
   "author": "",
-  "license": "ISC"
-
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "jsdom": "^16.6.0"
+  }
 }
