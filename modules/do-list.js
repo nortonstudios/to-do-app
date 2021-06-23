@@ -3,7 +3,6 @@ const Task = require('./do-item.js');
 module.exports = class toDoList {
     constructor(){
         this.tasks = [];
-            
     }
 
     // Creates an new task and pushes onto tasks array. 
@@ -70,8 +69,6 @@ module.exports = class toDoList {
     remove(index){
         this.tasks.splice(index, 1);
     }
-
-
   }
 
 

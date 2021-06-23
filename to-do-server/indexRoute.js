@@ -4,6 +4,7 @@ const jsdom = require('jsdom');
 const { stringify } = require('querystring');
 const toDoList = require('../modules/do-list');
 const {JSDOM} = jsdom;
+const htmlBuilder = require('./html-builder.js');
 
 const indexRouter = express.Router();
 
@@ -23,7 +24,7 @@ indexRouter.get('/', (request, res, next)=>{
         } else {
             res.writeHeader(200, {'Content-Type': 'text/html'});
             const dom = new JSDOM(data);
-            dom.window.document.getElementById("listContainer").innerHTML = toString(TDList.getList()[0]);
+            dom.window.document.getElementById("listContainer").innerHTML = htmlBuilder.build(TDList.getList(), ["title", "description"]);
             
             res.write(dom.window.document.documentElement.outerHTML);
             res.end(); 
