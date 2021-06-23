@@ -67,7 +67,9 @@ module.exports = class toDoList {
 
     //removes a task from list
     remove(index){
-        this.tasks.splice(index, 1);
+        if(this.tasks.length > 0){
+            this.tasks.splice(index, 1);
+        }
     }
   }
 
