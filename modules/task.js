@@ -8,7 +8,11 @@ module.exports = class Task{
         //     this.id = id;
         // }
         //this.id = 1;
-        this.title = title;
+        if (typeof title === 'string' && title !== ''){
+            this.title = title;
+        } else {
+            this.title = "Untitled Task";
+        }
         this.description = 'No description';
         this.startTime = Date.now();
         this.due = -1;

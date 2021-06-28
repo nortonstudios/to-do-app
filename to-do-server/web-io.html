@@ -1,34 +1,41 @@
 <!DOCTYPE html>
 <html>
-    <head>
+    <head lang="en">
         <title>To-do List</title>
         <!--<link rel = "stylesheet" type = "text/css" href = "../style/styel.css"/> -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     </head>
     <body>
         <h1>Welcome to your to-do list!</h1>
 
         <main>
-            <div id = "displayContainer"> 
-                <div id = "listContainer">
-                    <h2>Your list</h2>
-                    <div class = "task" id = "task0">
-                        <label for = "tasktitle">Title: </label>
-                        <span id = "tasktitle">Demo Task </span>
-                        <label for = "taskdescription">Description: </label>
-                        <span id = "taskdescription">Demo description.</span>
+            <div id = "displayContainer" class = "container"> 
+
+                <div id = "listSection" class="col-sm-6">
+                    <h2>Your List</h2>
+                    <div id = "listContainer" >
+                        <div class = "task" id = "task0">
+                            <label for = "tasktitle">Title: </label>
+                            <span id = "tasktitle">Demo Task </span>
+                            <label for = "taskdescription">Description: </label>
+                            <span id = "taskdescription">Demo description.</span>
+                        </div>
                     </div>
                 </div>
-                
-                <div id = "newTaskFields">
+
+                <div id = "newTaskFields" class = "col-sm-6">
+                    <h2>Add A Task</h2>
                     <form>
-                        <label for = "taskTitle">Title:</label>
-                        <input type = "text" id = "taskTitle" name = "taskTitle" value = "New Task">
+                        <label for = "newTaskTitle">Title:</label>
+                        <input type = "text" id = "newTaskTitle" name = "newTaskTitle" value = "New Task">
                         <br>
-                        <label for = "taskDesc">Description:</label>
-                        <input type = "text" id = "taskDesc" name = "taskDesc" value = "Description of task."> 
+                        <label for = "newTaskDesc">Description:</label>
+                        <input type = "text" id = "newTaskDesc" name = "newTaskDesc" value = "Description of task."> 
                         <br>
-                        <label for = "priority">Priority (optional):</label>
-                        <select id = "priority" name = "priority">
+                        <label for = "newTaskPriority">Priority (optional):</label>
+                        <select id = "newTaskPriority" name = "newTaskPriority">
                             <option value = "normal">Normal</option>
                             <option value = "low">Low</option>
                             <option value = "high">High</option>
@@ -37,14 +44,61 @@
                         <!--<label for = "taskEst">Length of time to complete task (optional):</label>
                         <input type = "text" id = "taskEst" name = "taskEst">-->
                     </form>
-                </div>
-
-                <div id = "controls">
-                    <button type="button" id="submit">Add Task</button>
-                    <button type="button" id="remove">Task Complete</button>
+                    <div id = "controls">
+                        <button type="button" id="submit" onclick="postTask()">Add Task</button>
+                        <!-- <button type="button" id="remove" onclick="deleteTask()">Task Complete</button> -->
+                        <!-- <script src = "./web-io.js"></script> -->
+                        
+                    </div>
                 </div>
 
             </div>
+
+            <script>
+                const url = 'http://localhost:8000';
+
+                // Page elements
+                
+                //const submitButton = document.querySelector('#submit');
+                //const removeButton = document.getElementsByClassName('deleteButton');
+                //const removeButton = document.querySelector("#remove");
+                
+                // AJAX CRUD functions
+                // POST
+                const postTask = () => {
+                    
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('POST', url);
+                    xhr.setRequestHeader('Content-type', 'application/json');
+                    xhr.send(JSON.stringify({title: document.getElementById("newTaskTitle").value}));
+            
+                    xhr.onreadystatechange = () => {
+                        if (xhr.readyState === XMLHttpRequest.DONE) {
+                            window.location.reload(true);
+                        }
+                    };
+                }
+                // DELETE
+                const deleteTask = (taskIndex) =>{
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('DELETE', url);
+                    xhr.setRequestHeader('Content-type', 'application/json');
+                    xhr.send(JSON.stringify({index: Number.parseInt(taskIndex)}));
+
+                    xhr.onreadystatechange = () => {
+                        if (xhr.readyState === XMLHttpRequest.DONE) {
+                            window.location.reload(true);
+                        }
+                    };
+                
+                }
+                
+                // Events
+                //submitButton.addEventListener('click', postTask);
+                //removeButton.addEventListener('click', deleteTask);
+                
+                </script>
+
         </main>
     </body>
 </html>

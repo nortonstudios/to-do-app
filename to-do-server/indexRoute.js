@@ -11,31 +11,35 @@ const indexRouter = express.Router();
 module.exports = indexRouter;
 
 let TDList = new toDoList();
-// TDList.newTask('Test Task');
-// TDList.newTask('Test 2');
+TDList.newTask('Test Task');
+TDList.newTask('Test 2');
 
 
-indexRouter.get('/', (request, res, next)=>{
+indexRouter.get('/', (req, res, next)=>{
     let code = 200;
-    servePage(request, res, next, code);
+    servePage(req, res, next, code);
     
 });
 
-indexRouter.post('/', (request, res, next)=>{
+indexRouter.post('/', (req, res, next)=>{
     let code = 201;
-    TDList.newTask("Post Test");
+    //TDList.newTask("Post Test");
+    console.log(req.body);
+    //console.log(req.body.title);
+    TDList.newTask(req.body.title);
 
-    servePage(request, res, next, code);
+    servePage(req, res, next, code);
 
 });
 
-indexRouter.delete('/', (request, res, next)=>{
+indexRouter.delete('/', (req, res, next)=>{
     let code = 200;
-    TDList.remove(0);
-    servePage(request, res, next, code);
+    console.log(req.body);
+    TDList.remove(req.body.index);
+    servePage(req, res, next, code);
 });
 
-function servePage(request, res, next, code){
+function servePage(req, res, next, code){
     fs.readFile('./web-io.html', 'utf-8', (err, data) => {
         if ( err ) {
             res.writeHead(400, {'Content-Type': 'text/html'});

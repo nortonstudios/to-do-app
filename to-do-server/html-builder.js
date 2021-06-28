@@ -13,8 +13,8 @@ class htmlBuilder{
             let index = 0;
             input.forEach(element => {
 
-                output += `<div class = "task" id = "task${index}">` + buildItem(element, desiredKeys) + '</div>';
-                index ++;
+                output += `<div class = "task" id = "task${index}">` + buildItem(element, desiredKeys) +  `<button type="button" id="${index}"  onclick="deleteTask(this.id)">Task Complete</button></div>\n`; 
+                index ++; 
                 
             });
             return output;

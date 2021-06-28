@@ -1,4 +1,4 @@
-const Task = require('./do-item.js');
+const Task = require('./task.js');
 
 module.exports = class toDoList {
     constructor(){
@@ -67,7 +67,7 @@ module.exports = class toDoList {
 
     //removes a task from list
     remove(index){
-        if(this.tasks.length > 0){
+        if(this.tasks.length > 0 && this.tasks.length >= index && typeof index === 'number' ){
             this.tasks.splice(index, 1);
         }
     }
