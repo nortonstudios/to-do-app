@@ -1,5 +1,5 @@
 const assert = require('assert');
-const Task = require('../modules/do-item.js');
+const Task = require('../modules/task.js');
 
 describe('Task class', () =>{
    

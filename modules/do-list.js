@@ -6,8 +6,14 @@ module.exports = class toDoList {
     }
 
     // Creates an new task and pushes onto tasks array. 
-    newTask(title){
+    newTask(title, description, priority){
         let newTask = this.newItem(title);
+        if(description){
+            newTask.newDesc(description);
+        }
+        if(priority){
+            newTask.setPriority(priority);
+        }
         this.tasks.push(newTask);
     }
 

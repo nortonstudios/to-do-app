@@ -41,9 +41,10 @@ module.exports = class Task{
      // Changes description of item. Expects a string.
      newDesc(description){
          if(!description || typeof description !== 'string'){
-             throw new Error('Ne dexcription in argument string.');
+             throw new Error('Ne description in argument string.');
+         } else if (description !== ''){
+            this.description = description;
          }
-         this.description = description;
      }
 
      // Returns time task was created.

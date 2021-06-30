@@ -11,8 +11,8 @@ const indexRouter = express.Router();
 module.exports = indexRouter;
 
 let TDList = new toDoList();
-TDList.newTask('Test Task');
-TDList.newTask('Test 2');
+TDList.newTask('Test Task', 'First test task.');
+TDList.newTask('Test 2', 'Second test task.');
 
 
 indexRouter.get('/', (req, res, next)=>{
@@ -26,7 +26,7 @@ indexRouter.post('/', (req, res, next)=>{
     //TDList.newTask("Post Test");
     console.log(req.body);
     //console.log(req.body.title);
-    TDList.newTask(req.body.title);
+    TDList.newTask(req.body.title, req.body.description, req.body.priority);
 
     servePage(req, res, next, code);
 
@@ -49,7 +49,7 @@ function servePage(req, res, next, code){
             res.writeHeader(code, {'Content-Type': 'text/html'});
             const dom = new JSDOM(data);
             if (TDList.getNumber() > 0 ){
-                dom.window.document.getElementById("listContainer").innerHTML = htmlBuilder.build(TDList.getList(), ["title"]);
+                dom.window.document.getElementById("listContainer").innerHTML = htmlBuilder.build(TDList.getList(), ["title", "description", "priority"]);
                 res.write(dom.window.document.documentElement.outerHTML);
             } else {
                 res.write(data);
