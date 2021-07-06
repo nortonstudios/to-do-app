@@ -8,24 +8,39 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     </head>
     <body>
-        <h1>Welcome to your to-do list!</h1>
+        
 
         <main>
             <div id = "displayContainer" class = "container"> 
+                <div class = "container-fluid text-center">
+                    <h1>Welcome to your to-do list!</h1>
+                </div>
 
-                <div id = "listSection" class="col-sm-6">
-                    <h2>Your List</h2>
-                    <div id = "listContainer" >
-                        <div class = "task" id = "task0">
-                            <label for = "tasktitle">Title: </label>
-                            <span id = "tasktitle">Demo Task </span>
-                            
-                        </div>
+                <div id = "listSection" class="container-fluid col-sm-6">
+                    <h2 class="text-center">Your List</h2>
+                    <div id = "listContainer" class = "container-fluid">
+                        <table class="table table-boardered">
+                            <tr>
+                                <th>Task</th>
+                                <th>Description</th>
+                                <th>Priority</th>
+                            </tr>
+                            <tr>
+                                <td>Demo Task</td>
+                                <td>Demo description.</td>
+                                <td>Normal</td>
+                            </tr>
+                            <!--<div class = "task" id = "task0">
+                                <label for = "tasktitle">Title: </label>
+                                <span id = "tasktitle">Demo Task </span>
+                                
+                            </div> -->
+                        </table>
                     </div>
                 </div>
 
-                <div id = "newTaskFields" class = "col-sm-6">
-                    <h2>Add A Task</h2>
+                <div id = "newTaskSection" class = "container-fluid col-sm-6">
+                    <h2 class="text-center">Add A Task</h2>
                     <form>
                         <label for = "newTaskTitle">Title:</label>
                         <input type = "text" id = "newTaskTitle" name = "newTaskTitle" value = "New Task">

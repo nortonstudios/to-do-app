@@ -22,21 +22,29 @@ indexRouter.get('/', (req, res, next)=>{
 });
 
 indexRouter.post('/', (req, res, next)=>{
-    let code = 201;
-    //TDList.newTask("Post Test");
     console.log(req.body);
-    //console.log(req.body.title);
-    TDList.newTask(req.body.title, req.body.description, req.body.priority);
-
-    servePage(req, res, next, code);
-
+    if(req.body.title){
+        let code = 201;
+        TDList.newTask(req.body.title, req.body.description, req.body.priority);
+        servePage(req, res, next, code);
+    } else {
+        res.writeHead(400, {'Content-Type': 'text/html'});
+        res.write(`invalid title. ${req.body}`);
+        res.end();
+    }
 });
 
 indexRouter.delete('/', (req, res, next)=>{
-    let code = 200;
     console.log(req.body);
-    TDList.remove(req.body.index);
-    servePage(req, res, next, code);
+    if (typeof req.body.index === 'number'){
+        let code = 204;
+        TDList.remove(req.body.index);
+        servePage(req, res, next, code);
+    } else {
+        res.writeHead(400, {'Content-Type': 'text/html'});
+        res.write(`invalid index. ${req.body}`);
+        res.end();
+    }
 });
 
 function servePage(req, res, next, code){
@@ -47,12 +55,14 @@ function servePage(req, res, next, code){
             res.end();
         } else {
             res.writeHeader(code, {'Content-Type': 'text/html'});
-            const dom = new JSDOM(data);
-            if (TDList.getNumber() > 0 ){
-                dom.window.document.getElementById("listContainer").innerHTML = htmlBuilder.build(TDList.getList(), ["title", "description", "priority"]);
-                res.write(dom.window.document.documentElement.outerHTML);
-            } else {
-                res.write(data);
+            if(code === 200){
+                const dom = new JSDOM(data);
+                if (TDList.getNumber() > 0 ){
+                    dom.window.document.getElementById("listContainer").innerHTML = htmlBuilder.build(TDList.getList(), ["title", "description", "priority"]);
+                    res.write(dom.window.document.documentElement.outerHTML);
+                } else {
+                    res.write(data);
+                }
             }
             res.end(); 
         }         

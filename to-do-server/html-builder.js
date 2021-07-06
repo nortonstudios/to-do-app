@@ -8,11 +8,13 @@ class htmlBuilder{
 
         let output = '';
 
-        if(input.length > 0 || desiredKeys){
+        if(input.length > 0 && desiredKeys){
 
             let index = 0;
             input.forEach(element => {
 
+                // Builds container for each list item. 
+                // Calls buildItem() for the elements within that list item.
                 output += `<div class = "task" id = "task${index}">` + buildItem(element, desiredKeys) +  `<button type="button" id="${index}"  onclick="deleteTask(this.id)">Task Complete</button></div>\n`; 
                 index ++; 
                 
@@ -29,24 +31,34 @@ module.exports = htmlBuilder;
 function buildItem(input, desiredKeys){
     let output = '';
     desiredKeys.forEach(key =>{
-        output += `<label for = "task${key}">${key.replace(/^./, key[0].toUpperCase())}:</label><span id = "task${key}">${input[key]}</span>`;
+
+        // Formatting for priority key. Translate from number to 
+        // low/med/high.
+        if(key === 'priority'){
+            // Get string value
+            const priorityLevel = getPriorityString(input[key]);
+
+            // Build entry with string.
+            output += `<label for = "task${key}">${key.replace(/^./, key[0].toUpperCase())}:</label><span id = "task${key}">${priorityLevel}</span>`;
+            
+        }else{
+            // Build HTML entry.
+            output += `<label for = "task${key}">${key.replace(/^./, key[0].toUpperCase())}:</label><span id = "task${key}">${input[key]}</span>`;
+        }
     });
     return output;
 }
 
-// <div> surrounds every field in JSON. 
-// TDD but no tests remaining. Need to figure out the start time issue. 
-function buildAll(input, desiredKeys) {
-    //return '<div>' + JSON.stringify(input) + '</div>';
-    let output = '';
-
-    if(input || desiredKeys){
-        input.forEach(element => {
-            Object.entries(element).forEach(([key, value]) =>{
-            output += `<div>${key}:${value}</div>`;
-            });
-        });
-        return output;
-    }
-    return output;
+// Translate numerical priority to low/med/high string.
+// Expects number.
+// Returns string.
+function getPriorityString(priority){
+    const priorityNumber = priority;
+    if (priorityNumber === 500){
+        return 'Medium';
+    } 
+    if (priorityNumber < 500) {
+        return 'Low';
+    } 
+    return 'High';    
 }
