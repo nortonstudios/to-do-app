@@ -11,8 +11,8 @@ const indexRouter = express.Router();
 module.exports = indexRouter;
 
 let TDList = new toDoList();
-TDList.newTask('Test Task', 'First test task.');
-TDList.newTask('Test 2', 'Second test task.');
+//TDList.newTask('Test Task', 'First test task.');
+//TDList.newTask('Test 2', 'Second test task.');
 
 
 indexRouter.get('/', (req, res, next)=>{
